@@ -1,0 +1,32 @@
+name: Publish to NuGet
+
+on:
+  release:
+    types: [published] # Запускается только когда ты нажимаешь "Publish release"
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x' # Укажи свою версию .NET
+
+      - name: Restore dependencies
+        run: dotnet restore
+
+      - name: Build project
+        run: dotnet build --configuration Release --no-restore
+
+      - name: Pack library
+        # Собираем nupkg файл. Версия подтянется из .csproj файла
+        run: dotnet pack --configuration Release --no-build --output .
+
+      - name: Push to NuGet
+        # Отправляем все сгенерированные пакеты
+        run: dotnet nuget push "*.nupkg" --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate

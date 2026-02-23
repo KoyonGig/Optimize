@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>net10.0</TargetFramework>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild> <PackageId>OptimizeLibrary.Library</PackageId>
+		<Version>1.1.0</Version>
+		<Authors>KrasnovIlya</Authors>
+		<Description>Высокопроизводительный кэш с поддержкой TTL и LRU.</Description>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageIcon>icon.png</PackageIcon>
+		<RepositoryUrl>https://github.com/user/repo</RepositoryUrl>
+		<PackageTags>cache;performance;lru;ttl</PackageTags>
+		<IncludeBuildOutput>false</IncludeBuildOutput>
+	</PropertyGroup>
+	<ItemGroup>
+	  <PackageReference Include="BenchmarkDotNet" Version="0.15.8" />
+	  <None Include=".github\workflows\publish.yml" />
+	  <None Include="images\icon.png" Pack="true" PackagePath="" />
+	</ItemGroup>
+</Project>
